@@ -3,47 +3,44 @@
   import {onMount} from "svelte"
 
   /* Array donde guardaremos la data */
-  let deportistas = []
+  let empanadas = []
+ 
+  /* Tipo comida favorita */
+  let tipo_comida_favorita = d3
+    .scaleOrdinal()
+    .domain(["Salado", "Dulce", "Agridulce"])
+    .range(["repulge1", "repulge2", "repulge3"])
 
-  /* 1. Escala para edades */
-  let grosor = d3.scaleLinear().range([5, 20])
+  /* Comida favorita */
+  let comida_favorita = d3
+    .scaleOrdinal()
+    .domain(["Asado", "Milanesa", "Empanadas","Alfajor","Helado", "Pizza"])
+    .range(["#FF0000", "#14FF00", "#FFFF00","#00FFFF","#FF00FF", "#0000FF"])
 
   /* 2. Escala para genero */
-  let colorGenero = d3
-    .scaleOrdinal()
-    .domain(["F", "M"])
-    .range(["#ffc0cb", "#c0f9ff"])
+  let comidas_por_semana = d3
+    .scaleQuantize()
+    .domain([0,4,9,14])
+    .range([4,6,8])
 
   /* 3. Escala para continentes */
-  let colorContinentes = d3
-    .scaleOrdinal()
-    .domain(["América", "África", "Asia", "Europa", "Oceanía"])
-    .range(["#ed334e", "#000000", "#fbb132", "#009fe3", "#00963f"])
+  let rating = d3
+    .scaleLinear()
+    .domain([1,10])
+    .range(["#000000", "#FBB040"])
 
   /* 4. Escala para altura */
-  let radioAltura = d3.scaleRadial()
-
-  /* 5. Escala para medallas */
-  let colorMedalla = d3.scaleOrdinal()
-    .domain(["Oro", "Plata", "Bronce"])
-    .range(["gold", "silver", "brown"])
+  let largo = []
 
   onMount(() => {
-    d3.csv("./data/deportistas.csv", d3.autoType).then(data => {
-      console.log(data)
-
-      /* Actualizamos dominio con la data de edad */
-      let minMaxEdad = d3.extent(data, d => d.edad)
-      grosor = grosor.domain(minMaxEdad)
-
-      /* Actualizamos dominio y rango con la data de altura */
-      let minMaxAltura = d3.extent(data, d => d.altura)
-      radioAltura = radioAltura.domain(minMaxAltura).range([25, 50])
-
-      deportistas = data
+    d3.csv("./data/empanadas.csv", d3.autoType).then(data => {
+      console.log(data); // Log the loaded data, not empanadas
+      
+      empanadas = data;
     })
   })
 </script>
+
 
 <main>
   <div class="header">
@@ -58,23 +55,18 @@
   <!-- Conedor de las entidades -->
   <div class="container">
     <!-- Iteramos la data para visualizar c/ entidad -->
-    {#each deportistas as dep}
+    {#each empanadas as emp}
       <div class="person-container">
-        <div class="medal"
-          style="background-color: {colorMedalla(dep.medalla)}"
-          ></div>
-        <div
-          class="person"
-          style="border-width: {grosor(dep.edad)}px; 
-        background-color:{colorGenero(dep.genero)}; 
-        width: {2 * radioAltura(dep.altura)}px; 
-        height: {2 * radioAltura(dep.altura)}px; 
-        border-color: {colorContinentes(dep.continente)}"
-        ></div>
+        <div class="empanada-wrapper" style="background-color: {comida_favorita(emp.comida_favorita_argentina)}">
+          <div class ="empanada-filler"><svg class = "empanada-svg" viewBox="0 0 891 643" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M595.638 643C376.975 643 123.887 597.117 33.3619 555.695C2.12439 541.038 -8.0756 495.155 6.58691 428.242C44.1995 256.18 231.625 0 595 0C958.375 0 1146.44 256.18 1183.41 428.242C1198.08 494.517 1187.88 541.038 1156.64 555.695C1067.39 597.117 814.3 643 595.638 643ZM595.638 38.2359C254.575 38.2359 79.262 276.573 44.1994 436.526C32.0869 492.606 42.2869 517.459 49.2994 520.645C124.525 555.058 361.675 604.764 595.638 604.764C820.038 604.764 1064.84 555.695 1141.98 520.645C1148.99 517.459 1159.19 492.606 1147.08 436.526C1112.01 276.573 936.7 38.2359 595.638 38.2359Z" fill="#594A42"/>
+            </svg>
+        </div>
+      </div>
         <p class="name">
-          <b>{dep.nombre}</b>
+          <b>{emp.nombre}</b>
           <br />
-          {dep.continente}
+          <!--{dep.continente} -->
         </p>
       </div>
     {/each}
@@ -144,5 +136,15 @@
     font-weight: normal;
     text-align: center;
     margin-top: 5px;
+  }
+  .empanada-wrapper {
+  width: 200px; 
+  height: 160px;
+  display: flex;
+  align-items: flex-end; 
+  }
+  .empanada-svg {
+    width: 200px;
+    height: auto;
   }
 </style>
