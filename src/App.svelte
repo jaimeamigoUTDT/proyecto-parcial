@@ -30,7 +30,10 @@
     .range(["#000000", "#FBB040"])
 
   /* 4. Escala para altura */
-  let largo = []
+  let gasto_por_mes = d3
+    .scaleOrdinal()
+    .domain([10,20],[30,40],[50,60])
+    .range([600,820,1190])
 
   onMount(() => {
     d3.csv("./data/empanadas.csv", d3.autoType).then(data => {
@@ -58,7 +61,7 @@
     {#each empanadas as emp}
       <div class="person-container">
         <div class="empanada-wrapper" style="background-color: {comida_favorita(emp.comida_favorita_argentina)}">
-          <div class ="empanada-filler"><svg class = "empanada-svg" viewBox="0 0 891 643" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <div class ="empanada-filler"><svg class = "empanada-svg" viewBox="0 0 {gasto_por_mes(emp.porcentaje_de_gasto)} 643" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M595.638 643C376.975 643 123.887 597.117 33.3619 555.695C2.12439 541.038 -8.0756 495.155 6.58691 428.242C44.1995 256.18 231.625 0 595 0C958.375 0 1146.44 256.18 1183.41 428.242C1198.08 494.517 1187.88 541.038 1156.64 555.695C1067.39 597.117 814.3 643 595.638 643ZM595.638 38.2359C254.575 38.2359 79.262 276.573 44.1994 436.526C32.0869 492.606 42.2869 517.459 49.2994 520.645C124.525 555.058 361.675 604.764 595.638 604.764C820.038 604.764 1064.84 555.695 1141.98 520.645C1148.99 517.459 1159.19 492.606 1147.08 436.526C1112.01 276.573 936.7 38.2359 595.638 38.2359Z" fill="#594A42"/>
             </svg>
         </div>

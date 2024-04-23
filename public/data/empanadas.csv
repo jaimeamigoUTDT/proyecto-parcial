@@ -1,23 +1,23 @@
 nombre,tipo_de_comida_favorita,comida_favorita_argentina,porcentaje_de_gasto,comidas_por_semana,rating
-Juan,Agridulce,Milanesa,30%,3,10
-Caterina Villegas,Agridulce,Asado,50%,10,8
-Estanislao Rios,Salado,Milanesa,60%,10,10
-Isabel Nunez,Salado,Alfajor,50%,10,10
-Valentina Vitteta,Dulce,Alfajor,40%,4,9
-Camilo Suarez,Dulce,Helado,40%,10,9
-Valentina Gayo,Dulce,Helado,50%,5,10
-Camila Cauzzo,Salado,Asado,45%,8,10
-Joaquin Schanz,Salado,Milanesa,40%,14,10
-Emi Verdun,Dulce,Helado,30%,7,10
-Mariana Zunino,Dulce,Milanesa,30%,7,10
-Serena Marelli,Dulce,Pizza,50%,4,10
-Felipe Caracoix,Dulce,Helado,10%,14,10
-Nicolas Wolodarsky,Agridulce,Empanadas,40%,7,10
-Juana Copello,Salado,Empanadas,10%,7,10
-Nazaret Serangosulu,Salado,Asado,10%,0,7
-Manuel Milde,Salado,Asado,30%,4,10
-Federico Peitti,Salado,Todas,10%,5,9
-Tomas Ward,Dulce,Alfajor,30%,1,10
-Maria Gimenez Costa,Agridulce,Empanadas,30%,5,9
-Carlos Araujo,Salado,Asado,10%,7,8
-Tomas Curzio,Salado,Pizza,40%,10,9
+Juan,Agridulce,Milanesa,30,3,10
+Caterina Villegas,Agridulce,Asado,50,10,8
+Estanislao Rios,Salado,Milanesa,60,10,10
+Isabel Nunez,Salado,Alfajor,50,10,10
+Valentina Vitteta,Dulce,Alfajor,40,4,9
+Camilo Suarez,Dulce,Helado,40,10,9
+Valentina Gayo,Dulce,Helado,50,5,10
+Camila Cauzzo,Salado,Asado,45,8,10
+Joaquin Schanz,Salado,Milanesa,40,14,10
+Emi Verdun,Dulce,Helado,30,7,10
+Mariana Zunino,Dulce,Milanesa,30,7,10
+Serena Marelli,Dulce,Pizza,50,4,10
+Felipe Caracoix,Dulce,Helado,10,14,10
+Nicolas Wolodarsky,Agridulce,Empanadas,40,7,10
+Juana Copello,Salado,Empanadas,10,7,10
+Nazaret Serangosulu,Salado,Asado,10,0,7
+Manuel Milde,Salado,Asado,30,4,10
+Federico Peitti,Salado,Todas,10,5,9
+Tomas Ward,Dulce,Alfajor,30,1,10
+Maria Gimenez Costa,Agridulce,Empanadas,30,5,9
+Carlos Araujo,Salado,Asado,10,7,8
+Tomas Curzio,Salado,Pizza,40,10,9
