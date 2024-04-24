@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 .header {
     display: flex;
     justify-content: center;
@@ -8,18 +11,21 @@
 }
 
 .headline {
-    font-size: 30px;
+    font-family: 'Lora';
+    font-size: 50px;
     line-height: 1.2;
     font-weight: normal;
     text-align: center;
-    margin: 20px;
+    margin-bottom: 10px;
+
 }
 
-.bajada {
-    font-size: 18px;
+.subheadline {
+    font-family: 'Montserrat';
+    font-size: 30px;
     font-weight: normal;
     text-align: center;
-    margin: 10px;
+    margin: 0px;
 }
 
 .headline b {
@@ -32,17 +38,19 @@
     align-items: end;
     margin: auto;
     flex-wrap: wrap;
-    max-width: 1000px;
-    gap: 30px;
+    max-width: max-content;
+    gap: 80px;
     margin-bottom: 100px;
 }
 
 .name {
-    font-size: 14px;
+    font-family: 'Montserrat';
+    font-size: 20px;
     color: rgb(65, 65, 65);
-    font-weight: normal;
-    text-align: center;
-    margin-top: 5px;
+    position: relative;
+    font-weight:500;
+    text-align:center;
+    margin-top: 15px;
 }
 
 .little-container {
@@ -51,42 +59,77 @@
 }
 
 .empanada-wrapper {
-    border: red 1px solid;
     height: 150px;
     width: 200px;
     position: relative;
+    align-items: center;
 }
 
 .empanada-svg {
     position: absolute;
     left: 0;
     bottom: 0;
-    margin: 0; /* Remove margins */
-    padding: 0; /* Remove padding */
-    width: 200px;
-    height: 103px; /* Fill the container horizontally */
+
     z-index: 10;
 }
 
 .empanada-fill {
     position: absolute;
-    left: -19px;
-    bottom: -10.5px;
+    
+    bottom: -3px;
     margin: 0; /* Remove margins */
     padding: 0; /* Remove padding */
     z-index: 5;
     height: 120px;
-    scale: 0.865;
 }
 
 .empanada-taste-big {
     position: absolute;
-    left: 131px;
-    bottom: -15px;
+    left: 180px;
+    bottom: -60px;
     margin: 0; /* Remove margins */
     padding: 0; /* Remove padding */
-    width: 200px;
-    height: 103px; /* Fill the container horizontally */
-    scale: 0.865;
     z-index: 7;
+    scale: 1.1;
+}
+
+.empanada-taste-medium {
+    position: absolute;
+    left: 130px;
+    bottom: -35px;
+    z-index: 7;
+}
+
+.empanada-taste-small {
+    position: absolute;
+    left: 100px;
+    bottom: -36px;
+    z-index: 7;
+    scale: 1.01;
+}
+
+.viz-code {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.button {
+    position: relative;
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 17.143px; /* 71.429% */
+    letter-spacing: -0.2px;
+    display: inline-block;
+    justify-self: center;
+    padding: 20px;
+    gap: 10px;  border-radius: 30px;
+    background: #242C4F;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    margin-left: 500px;
+    margin-top: 30px;
 }
