@@ -1,56 +1,78 @@
 <script>
-  import * as d3 from "d3"
-  import {onMount} from "svelte"
+  import * as d3 from "d3";
+  import { onMount } from "svelte";
 
   /* Array donde guardaremos la data */
-  let empanadas = []
- 
+  let empanadas = [];
+
   /* Tipo comida favorita */
   let tipo_comida_favorita = d3
     .scaleOrdinal()
     .domain(["Salado", "Dulce", "Agridulce"])
-    .range(["repulge1", "repulge2", "repulge3"])
+    .range(["repulge1", "repulge2", "repulge3"]);
 
   /* Comida favorita */
   let comida_favorita = d3
     .scaleOrdinal()
-    .domain(["Asado", "Milanesa", "Empanadas","Alfajor","Helado", "Pizza"])
-    .range(["#FF0000", "#14FF00", "#FFFF00","#00FFFF","#FF00FF", "#0000FF"])
+    .domain(["Asado", "Milanesa", "Empanadas", "Alfajor", "Helado", "Pizza"])
+    .range(["#FF0000", "#14FF00", "#FFFF00", "#00FFFF", "#FF00FF", "#0000FF"]);
 
   /* 2. Escala para genero */
   let comidas_por_semana = d3
     .scaleQuantize()
-    .domain([0,4,9,14])
-    .range([4,6,8])
+    .domain([0, 4, 9, 14])
+    .range([4, 6, 8]);
 
   /* 3. Escala para continentes */
-  let rating = d3
-    .scaleLinear()
-    .domain([1,10])
-    .range(["#000000", "#FBB040"])
+  let rating = d3.scaleLinear().domain([1, 10]).range(["#000000", "#FBB040"]);
 
   /* 4. Escala para altura */
   let gasto_por_mes = d3
     .scaleOrdinal()
-    .domain([10,20],[30,40],[50,60])
-    .range([600,820,1190])
+    .domain([10, 20], [30, 40], [50, 60])
+    .range([
+      "M95.9802 0.479547C95.8652 0.469756 95.7504 0.466677 95.6363 0.470094C37.7786 0.51144 7.93367 41.0143 1.94193 68.2223C-0.395024 78.8086 1.23068 86.0678 6.20941 88.3867C20.5545 94.9023 60.5118 102.116 95.224 102.199C95.2678 102.2 95.3116 102.2 95.3555 102.199C95.5126 102.199 95.6697 102.199 95.8266 102.199C95.9226 102.199 96.0145 102.181 96.099 102.149C97.3823 102.39 98.7229 101.772 99.3445 100.55C106.034 87.3898 108.973 70.107 108.766 52.6152C108.56 35.0959 105.195 17.0708 99.006 2.32042C98.4882 1.08624 97.2455 0.376924 95.9802 0.479547ZM95.9744 93.4331C100.697 82.0014 102.908 67.6043 102.732 52.6864C102.564 38.4387 100.22 23.9261 95.9741 11.3688C91.7284 23.9258 89.3847 38.4381 89.2165 52.6854C89.0405 67.6038 91.2518 82.0012 95.9744 93.4331ZM83.1821 52.6142C82.9982 68.1973 85.3104 83.6145 90.5472 96.0985C55.0273 95.4131 20.1734 88.0289 8.74958 82.8415C7.63191 82.3374 6.0062 78.4053 7.93672 69.533C13.3662 44.9461 39.8965 8.65307 91.2549 6.60963C86.1422 20.4907 83.3692 36.7596 83.1821 52.6142Z", 
+    "M124.433 4.35013C125.65 4.30766 126.822 5.00959 127.321 6.19898C139.618 35.5042 140.598 72.2698 127.318 98.3934C127.046 98.9287 126.636 99.348 126.154 99.63C125.662 100.244 124.933 100.663 124.095 100.743C114.422 101.66 104.517 102.199 95.0195 102.199C60.1683 102.199 19.8304 94.9397 5.40228 88.3863C0.423552 86.0674 -1.20215 78.8083 1.1348 68.222C7.1296 41.0001 37.002 0.469727 94.9178 0.469727C105.72 0.469727 115.55 1.87963 124.433 4.35013ZM124.214 90.7119C115.118 68.7708 115.537 39.8244 124.214 14.9428C132.891 39.8244 133.309 68.7708 124.214 90.7119ZM119.826 9.38285C109.237 36.8851 108.365 70.1812 119.52 95.0669C111.419 95.7498 103.136 96.1496 95.0195 96.1496C57.7298 96.1496 19.9321 88.2855 7.94245 82.8411C6.82478 82.337 5.19907 78.405 7.1296 69.5326C12.718 44.2264 40.6598 6.51903 95.0195 6.51903C104.004 6.51903 112.266 7.54904 119.826 9.38285Z", 
+    "M155.264 30.5199C150.988 41.6469 148.741 50.6204 148.58 59.173C148.412 68.051 150.489 76.7077 155.264 87.0588C160.04 76.7077 162.117 68.051 161.949 59.173C161.787 50.6204 159.54 41.6469 155.264 30.5199ZM157.417 95.3078C156.981 95.84 156.365 96.2232 155.647 96.359C137.846 99.7236 115.624 102.199 95.2729 102.199C60.4218 102.199 20.0839 94.9397 5.6557 88.3863C0.67697 86.0674 -0.948735 78.8083 1.38822 68.222C7.38302 41.0001 37.2554 0.469727 95.1713 0.469727C121.183 0.469727 141.559 8.64558 156.648 20.1195C157.334 20.4189 157.91 20.9725 158.223 21.7173C164.284 36.1636 167.769 47.7534 167.983 59.0589C168.198 70.4369 165.099 81.2229 158.561 94.0832C158.293 94.6109 157.891 95.0259 157.417 95.3078ZM95.2729 96.1496C114.255 96.1496 134.154 93.9628 150.486 91.0814C144.962 79.5199 142.348 69.5406 142.546 59.0589C142.75 48.2859 145.923 37.2546 151.467 23.7396C137.493 13.6259 118.872 6.51903 95.2729 6.51903C40.9133 6.51903 12.9714 44.2264 7.38301 69.5326C5.45249 78.405 7.0782 82.337 8.19587 82.8411C20.1855 88.2855 57.9832 96.1496 95.2729 96.1496Z"]);
+
+  let gasto_height = d3
+    .scaleOrdinal()
+    .domain([10, 20], [30, 40], [50, 60])
+    .range([109, 137, 168]);
+
+  let gasto_fill = d3
+    .scaleOrdinal()
+    .domain([10, 20], [30, 40], [50, 60])
+    .range([
+      "M109.001 110.501C114.667 112.604 24.4996 114 4.87682 91.69C-14.746 69.3801 45.9992 -5.49992 109 1.00101C116.877 11.8744 118.754 29.9948 122.5 58.5011C119.795 89.5719 118.087 97.2526 109.001 110.501Z",
+    "M140 110.5C145.666 112.604 17.484 121.266 2.64073 93.1968C-12.2025 65.1272 63.5 -26 142.5 8.00018C150.376 18.8736 150.253 34.494 154 63.0002C151.298 94.0277 149.092 97.2434 140.038 110.445L140 110.5Z",
+    "M179 106C184.667 108.104 17.8431 122.57 2.9999 94.5001C-11.8434 66.4305 76.1528 -46.253 179 24C186.877 34.8734 188.254 39.4938 192 68.0001C189.295 99.071 188.087 92.7523 179 106Z",
+    ]);
+
+  let gusto_path = d3
+  .scaleOrdinal()
+    .domain([10, 20], [30, 40], [50, 60])
+    .range([
+      "M1 42L13 2L24 42L13 80L1 42Z", 
+      "M1 42L13 2L24 42L13 80L1 42Z", 
+      "M1 42L13 2L24 42L13 80L1 42Z"]);
 
   onMount(() => {
-    d3.csv("./data/empanadas.csv", d3.autoType).then(data => {
+    d3.csv("./data/empanadas.csv", d3.autoType).then((data) => {
       console.log(data); // Log the loaded data, not empanadas
-      
-      empanadas = data;
-    })
-  })
-</script>
 
+      empanadas = data;
+    });
+  });
+
+</script>
 
 <main>
   <div class="header">
     <img src="/images/olympics-logo.png" width="100" alt="anillos" />
     <h3 class="headline">
-      <b>Triunfos Olímpicos</b>
-      Medallas, alturas y continentes
+      <b>Gastronomía argentina</b>
+      Creando tu empanada ideal
     </h3>
     <p class="bajada">Explorando los logros olímpicos a través de datos</p>
   </div>
@@ -59,95 +81,30 @@
   <div class="container">
     <!-- Iteramos la data para visualizar c/ entidad -->
     {#each empanadas as emp}
-      <div class="person-container">
-        <div class="empanada-wrapper" style="background-color: {comida_favorita(emp.comida_favorita_argentina)}">
-          <div class ="empanada-filler"><svg class = "empanada-svg" viewBox="0 0 {gasto_por_mes(emp.porcentaje_de_gasto)} 643" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M595.638 643C376.975 643 123.887 597.117 33.3619 555.695C2.12439 541.038 -8.0756 495.155 6.58691 428.242C44.1995 256.18 231.625 0 595 0C958.375 0 1146.44 256.18 1183.41 428.242C1198.08 494.517 1187.88 541.038 1156.64 555.695C1067.39 597.117 814.3 643 595.638 643ZM595.638 38.2359C254.575 38.2359 79.262 276.573 44.1994 436.526C32.0869 492.606 42.2869 517.459 49.2994 520.645C124.525 555.058 361.675 604.764 595.638 604.764C820.038 604.764 1064.84 555.695 1141.98 520.645C1148.99 517.459 1159.19 492.606 1147.08 436.526C1112.01 276.573 936.7 38.2359 595.638 38.2359Z" fill="#594A42"/>
-            </svg>
-        </div>
-      </div>
-        <p class="name">
-          <b>{emp.nombre}</b>
-          <br />
-          <!--{dep.continente} -->
-        </p>
+      <div class = "empanada-wrapper">
+        <svg
+        class = "empanada-taste-big"
+        >
+          <path d={gusto_path(emp.porcentaje_de_gasto)} fill={comida_favorita(emp.comida_favorita_argentina)}>
+        </svg>
+
+        <svg
+        class = "empanada-fill"
+        fill="none">
+          <path d={gasto_fill(emp.porcentaje_de_gasto)} fill={rating(emp.rating)}>
+        </svg>
+
+        <svg
+        class = "empanada-svg"
+        
+          >
+          <path fill-rule="evenodd" clip-rule="evenodd" d={gasto_por_mes(emp.porcentaje_de_gasto)} fill="#594A42"/>        
+        </svg>
       </div>
     {/each}
   </div>
 </main>
 
 <style>
-  .header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 50px;
-    margin-bottom: 80px;
-  }
-  .headline {
-    font-size: 30px;
-    line-height: 1.2;
-    font-weight: normal;
-    text-align: center;
-    margin: 20px;
-  }
-  .bajada {
-    font-size: 18px;
-    font-weight: normal;
-    text-align: center;
-    margin: 10px;
-  }
-  .headline b {
-    display: block;
-  }
-  .container {
-    display: flex;
-    justify-content: center;
-    align-items: end;
-    margin: auto;
-    flex-wrap: wrap;
-    max-width: 1000px;
-    gap: 30px;
-    margin-bottom: 100px;
-  }
-  .person-container {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    flex: 180px 0 0;
-  }
-  .person {
-    width: 100px;
-    height: 100px;
-    border: 10px solid black;
-    border-radius: 50%;
-    box-sizing: border-box;
-    background-color: pink;
-  }
-  .medal {
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    background-color: gold;
-    margin: 5px 0;
-  }
-  .name {
-    font-size: 14px;
-    color: rgb(65, 65, 65);
-    font-weight: normal;
-    text-align: center;
-    margin-top: 5px;
-  }
-  .empanada-wrapper {
-  width: 200px; 
-  height: 160px;
-  display: flex;
-  align-items: flex-end; 
-  }
-  .empanada-svg {
-    width: 200px;
-    height: auto;
-  }
+  @import "./style/styles.css";
 </style>
