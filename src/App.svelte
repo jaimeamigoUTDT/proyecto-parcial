@@ -6,11 +6,26 @@
   /* Array donde guardaremos la data */
   let empanadas = [];
 
+  function loadGoogleSheet(id, gid) {
+    d3.csv(
+      `https://docs.google.com/spreadsheets/u/1/d/${id}/export?format=csv&id=${id}&gid=${gid}`,
+    )
+      .then((data) => {
+        console.log(data);
+        empanadas = data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  loadGoogleSheet("1ZKjSD97M17JPG-wn9zvJ_DuIQms0tZFaoRrYA8CXWGM", "432932618");
+
   /* Tipo comida favorita */
   let tipo_comida_favorita = d3
     .scaleOrdinal()
     .domain(["Salado", "Dulce", "Agridulce"])
-    .range(["salado", "dulce", "agridulce"]);
+    .range(["dulce", "dulce", "dulce"]);
 
   /* Comida favorita */
   let comida_favorita = d3
@@ -22,7 +37,7 @@
   let comidas_x_semana = d3
     .scaleOrdinal()
     .domain([0, 4], [5, 9], [10, 14])
-    .range([4,6,8]);
+    .range([4, 6, 8]);
 
   /* 3. Escala para continentes */
   let rating = d3.scaleLinear().domain([1, 10]).range(["#000000", "#FBB040"]);
@@ -30,7 +45,7 @@
   /* 4. Escala para altura */
   let gasto_por_mes = d3
     .scaleOrdinal()
-    .domain([10, 20], [30, 40], [50, 60])
+    .domain([10, 20], [30, 40], [50, 100])
     .range(["10-20", "30-40", "50-60"]);
 
   let gasto_fill = d3
@@ -63,8 +78,6 @@
       empanadas = data;
     });
   });
-  let numberOfElements = 0;
-  let elements = [];
 </script>
 
 <main>
@@ -103,16 +116,17 @@
             class="empanada-svg"
             alt="Empanada"
           />
-          <!-- <div class="ellipse"></div>
-            
-            {#each Array.from({ length: comidas_x_semana(parseInt(emp.comidas_por_semana)) }, (_, index) => functions.calculatePosition(index, comidas_x_semana(parseInt(emp.comidas_por_semana)))) as { x, y }, index}
-            <img
-              src="./src/assets/{tipo_comida_favorita(emp.tipo_de_comida_favorita)}.svg"
-              class="element"
-              style="top: {y}px; left: {x}px;"
-              alt="mini-repulgue"
-            />
-            {/each} -->
+
+          <!-- TODO modificar clases para que se adapte el repulge -->
+          <img
+            src="./src/assets/{gasto_por_mes(
+              emp.porcentaje_de_gasto,
+            )} {tipo_comida_favorita(
+              emp.tipo_de_comida_favorita,
+            )} - {comidas_x_semana(emp.comidas_por_semana)}.svg"
+            class="repulgue"
+            alt="repulgue"
+          />
         </div>
         <p class="name">
           {emp.nombre} <br />
