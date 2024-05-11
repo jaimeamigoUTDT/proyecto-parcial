@@ -79,16 +79,35 @@
     .domain(['1','2','3','4','5','6','7'])
     .range(["small", "small", "medium", "medium", "big", "big","big"]);
 
+  let showImageClicked = false;
+
+  function showImage() {
+    showImageClicked = true;
+  }
+
+  function closeImage() {
+    showImageClicked = false;
+  }
   
 </script>
 
 <main>
   <div class="header">
-    <img src="./src/assets/Flag_of_Argentina.svg" width="200px" alt="bandera" />
+    <img src="./src/assets/Flag_of_Argentina.svg" width="100px" alt="bandera" />
     <h3 class="headline">
-      <b>Gastronomía argentina</b>
+      <b>🧉 Gastronomía argentina 🧉</b>
     </h3>
-    <h4 class="subheadline">Creando tu empanada ideal</h4>
+    <h4 class="subheadline">Sé tu propia empanada</h4>
+    <p id="showImage" on:click={showImage}>Hace click 👆 para ver la guía</p>
+
+    {#if showImageClicked}
+      <div class="image-overlay">
+        <div class="image-container">
+          <span class="close-button" on:click={closeImage}>×</span>
+          <img src="./src/assets/viz-code.png" alt="Your Image" class="blur-image" />
+        </div>
+      </div>
+    {/if}
   </div>
 
   <!-- Conedor de las entidades -->
@@ -136,16 +155,13 @@
       </div>
     {/each}
   </div>
-  <img
-    src="./src/assets/viz-code.png"
-    class="viz-code"
-    alt="guia para la visualizacion"
-  />
   <a
     href="https://docs.google.com/forms/d/e/1FAIpQLSe2NxH6-xyjCejQJKLfLZrZiWtOoUmYopUNxuC4NLlTnjbPnw/viewform?usp=sharing"
     class="button"
     target="”_blank”">Crea tu empanada</a
   >
+
+  
 </main>
 
 <style>
