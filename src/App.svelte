@@ -1,7 +1,5 @@
 <script>
   import * as d3 from "d3";
-  import { onMount } from "svelte";
-  import * as functions from "./functions/functions.js";
 
   /* Array donde guardaremos la data */
   let empanadas = [];
@@ -93,7 +91,7 @@
 
 <main>
   <div class="header">
-    <img src="./src/assets/Flag_of_Argentina.svg" width="100px" alt="bandera" />
+    <img src="../images/Flag_of_Argentina.svg" width="100px" alt="bandera" />
     <h3 class="headline">
       <b>🧉 Gastronomía argentina 🧉</b>
     </h3>
@@ -104,7 +102,7 @@
       <div class="image-overlay">
         <div class="image-container">
           <span class="close-button" on:click={closeImage}>×</span>
-          <img src="./src/assets/viz-code.png" alt="Your Image" class="blur-image" />
+          <img src="../images/viz-code.png" alt="Your Image" class="blur-image" />
         </div>
       </div>
     {/if}
@@ -133,14 +131,14 @@
           >
 
           <img
-            src="./src/assets/{gasto_por_mes(emp.porcentaje_de_gasto)}.svg"
+            src="../images/{gasto_por_mes(emp.porcentaje_de_gasto)}.svg"
             class="empanada-svg"
             alt="Empanada"
           />
 
           <!-- TODO modificar clases para que se adapte el repulge -->
           <img
-            src="./src/assets/{gasto_por_mes(
+            src="../images/{gasto_por_mes(
               emp.porcentaje_de_gasto,
             )} {tipo_comida_favorita(
               emp.tipo_de_comida_favorita,
