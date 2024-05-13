@@ -17,7 +17,7 @@
       });
   }
 
-  loadGoogleSheet("1ZKjSD97M17JPG-wn9zvJ_DuIQms0tZFaoRrYA8CXWGM", "432932618");
+  loadGoogleSheet("1ZKjSD97M17JPG-wn9zvJ_DuIQms0tZFaoRrYA8CXWGM", "1484667775");
 
   /* Tipo comida favorita */
   let tipo_comida_favorita = d3
