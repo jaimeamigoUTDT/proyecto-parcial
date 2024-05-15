@@ -93,9 +93,9 @@
   <div class="header">
     <img src="../images/Flag_of_Argentina.svg" width="100px" alt="bandera" />
     <h3 class="headline">
-      <b>🧉 Gastronomía argentina 🧉</b>
+      <b>Gastronomía argentina</b>
     </h3>
-    <h4 class="subheadline">Sé tu propia empanada</h4>
+    <h4 class="subheadline">Manifestá tu empanada interior</h4>
     <p id="showImage" on:click={showImage}>Hace click 👆 para ver la guía</p>
 
     {#if showImageClicked}
@@ -156,7 +156,7 @@
   <a
     href="https://docs.google.com/forms/d/e/1FAIpQLSe2NxH6-xyjCejQJKLfLZrZiWtOoUmYopUNxuC4NLlTnjbPnw/viewform?usp=sharing"
     class="button"
-    target="”_blank”">Crea tu empanada</a
+    target="”_blank”">Crea tú empanada</a
   >
 
   
