@@ -43,8 +43,8 @@
   /* 4. Escala para altura */
   let gasto_por_mes = d3
   .scaleOrdinal()
-    .domain(['1','2','3','4','5','6','7'])  // Define los puntos de división
-    .range(["10-20","10-20", "30-40","30-40", "50-60","50-60","50-60"]);
+    .domain(['1','2','3','4','5','6','7','8','9','10'])  // Define los puntos de división
+    .range(["10-20","10-20", "30-40","30-40", "50-60","50-60","50-60","50-60","50-60","50-60"]);
 
   let gasto_fill = d3
     .scaleOrdinal()
